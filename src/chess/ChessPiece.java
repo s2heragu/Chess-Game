@@ -1,5 +1,9 @@
 package chess;
 
-public class ChessPiece {
+abstract class ChessPiece {
+	int row;
+	int col;
 	
+	
+	public abstract String toString();
 }
