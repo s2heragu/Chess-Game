@@ -1,4 +1,5 @@
 package chess;
+import pieces.*;
 
 public class Board {
 	public ChessPiece[][] board;
