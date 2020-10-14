@@ -14,7 +14,7 @@ public class Board{
 	}
 	
 	//checks if the king is checked;
-	public boolean kingChecked() {
+	public boolean kingChecked(boolean white) {
 		return false;
 	}
 	

@@ -12,7 +12,7 @@ public class Bishop extends ChessPiece {
 			return false;
 		}
 		if(diagCheck(newRow,newCol,board)) {
-			
+			return true;
 		}
 		return false;
 	}

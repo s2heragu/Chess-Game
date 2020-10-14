@@ -94,25 +94,36 @@ public abstract class ChessPiece {
 	}
 	
 	public boolean diagCheck(int newRow, int newCol, Board board) {
-		if(Math.abs(newRow-this.row()) == Math.abs(newRow - newCol)) {
+		if(Math.abs(newRow-this.row()) == Math.abs(newCol - this.col())) {
 			int rowInc = 1;
 			int colInc = 1;
-			if(newRow<this.row()) {
+			if(newRow<this.row) {
 				rowInc = -1;
 			}
-			if(newCol<this.col()) {
+			if(newCol<this.col) {
 				colInc = -1;
 			}
-			newRow += rowInc;
-			newCol += colInc;
-			while(newRow!=this.row() && newCol!=this.col()) {
-				if(board.board[newRow][newCol] != null) {
+			int Row = this.row+rowInc;
+			int Col = this.col+colInc;
+			while(Row!=newRow && Col!=newCol) {
+				if(board.board[Row][Col] != null) {
 					return false;
 				}
-				newRow += rowInc;
-				newCol += colInc;
+				Row += rowInc;
+				Col += colInc;
 			}
-			return true;
+			if(board.board[Row][Col]==null || board.board[Row][Col].isWhite != this.isWhite) {
+				Board editedBoard = board.copy();
+				editedBoard.board[this.row][this.col] = null;
+				editedBoard.board[newRow][newCol] = this;
+				if(editedBoard.kingChecked(this.isWhite)) {
+					return false;
+				}
+				this.row = newRow;
+				this.col = newCol;
+				board = editedBoard;
+				return true;
+			}
 		}
 		return false;
 	}
