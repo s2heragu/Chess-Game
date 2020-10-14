@@ -1,7 +1,7 @@
 package chess;
 import pieces.*;
 
-public class Board {
+public class Board{
 	public ChessPiece[][] board;
 	
 	
@@ -11,6 +11,22 @@ public class Board {
 		//Start game with new board
 		this.board = new ChessPiece[9][9];
 		System.out.println(board[0][0]); // null, this is correct
+	}
+	
+	//checks if the king is checked;
+	public boolean kingChecked() {
+		return false;
+	}
+	
+	//makes a copy of the Board
+	public Board copy() {
+		Board copy = new Board();
+		for(int i = 0; i < 9;i++) {
+			for(int j = 0; j<9; j++) {
+				copy.board[i][j] = this.board[i][j];
+			}
+		}
+		return copy;
 	}
 	
 	public String toString() {

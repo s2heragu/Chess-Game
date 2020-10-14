@@ -1,5 +1,7 @@
 package pieces;
 
+import chess.Board;
+
 public abstract class ChessPiece {
 	private int row;
 	private int col;
@@ -39,6 +41,42 @@ public abstract class ChessPiece {
 	protected void setType(char type) {
 		this.type = type;
 	}
+	
+	protected boolean errorCheck(int newRow, int newCol) {
+		if(newRow > 7 || newCol > 7 || newRow < 0 || newCol < 0) {
+			return true;
+		}
+		if(newRow == this.row() && newCol == this.col()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean diagCheck(int newRow, int newCol, Board board) {
+		if(Math.abs(newRow-this.row()) == Math.abs(newRow - newCol)) {
+			int rowInc = 1;
+			int colInc = 1;
+			if(newRow<this.row()) {
+				rowInc = -1;
+			}
+			if(newCol<this.col()) {
+				colInc = -1;
+			}
+			newRow += rowInc;
+			newCol += colInc;
+			while(newRow!=this.row() && newCol!=this.col()) {
+				if(board.board[newRow][newCol] != null) {
+					return false;
+				}
+				newRow += rowInc;
+				newCol += colInc;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	public abstract boolean checkMove(int newRow, int newCol, Board board);
 	
 	public String toString() {
 		if(this.isWhite) {
