@@ -5,5 +5,9 @@ public class Pawn extends ChessPiece{
 		super(row,col,isWhite);
 		setType('p');
 	}
+	
+	public ChessPiece copy() {
+		return new Pawn(this.row(),this.col(),this.isWhite());
+	}
 
 }

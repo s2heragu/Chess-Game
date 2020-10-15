@@ -5,4 +5,8 @@ public class Knight extends ChessPiece {
 		super(row,col,isWhite);
 		setType('N');
 	}
+	
+	public ChessPiece copy() {
+		return new Knight(this.row(),this.col(),this.isWhite());
+	}
 }

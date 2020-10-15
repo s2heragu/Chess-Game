@@ -93,7 +93,7 @@ public abstract class ChessPiece {
 		return false;
 	}
 	
-	public boolean diagCheck(int newRow, int newCol, Board board) {
+	protected boolean diagCheck(int newRow, int newCol, Board board) {
 		if(Math.abs(newRow-this.row()) == Math.abs(newCol - this.col())) {
 			int rowInc = 1;
 			int colInc = 1;
@@ -115,7 +115,9 @@ public abstract class ChessPiece {
 			if(board.board[Row][Col]==null || board.board[Row][Col].isWhite != this.isWhite) {
 				Board editedBoard = board.copy();
 				editedBoard.board[this.row][this.col] = null;
-				editedBoard.board[newRow][newCol] = this;
+				editedBoard.board[newRow][newCol] = this.copy();
+				editedBoard.board[newRow][newCol].row = newRow;
+				editedBoard.board[newRow][newCol].col = newCol;
 				if(editedBoard.kingChecked(this.isWhite)) {
 					return false;
 				}
@@ -128,7 +130,73 @@ public abstract class ChessPiece {
 		return false;
 	}
 	
+	protected boolean vertCheck(int newRow, int newCol, Board board) {
+		if(newCol != this.col) {
+			return false;
+		}
+		int inc = 1;
+		if(newRow < this.row) {
+			inc = -1;
+		}
+		int Row = this.row + inc;
+		while(newRow != Row) {
+			if(board.board[Row][newCol]!=null) {
+				return false;
+			}
+			Row += inc;
+		}
+		if(board.board[newRow][newCol]==null || board.board[newRow][newCol].isWhite != this.isWhite) {
+			Board editedBoard = board.copy();
+			editedBoard.board[this.row][this.col] = null;
+			editedBoard.board[newRow][newCol] = this.copy();
+			editedBoard.board[newRow][newCol].row = newRow;
+			editedBoard.board[newRow][newCol].col = newCol;
+			if(editedBoard.kingChecked(this.isWhite)) {
+				return false;
+			}
+			this.row = newRow;
+			this.col = newCol;
+			board = editedBoard;
+			return true;
+		}
+		return false;
+	}
+	
+	protected boolean horizCheck(int newRow, int newCol, Board board) {
+		if(newRow != this.row) {
+			return false;
+		}
+		int inc = 1;
+		if(newCol < this.col) {
+			inc = -1;
+		}
+		int Col = this.col + inc;
+		while(newCol != Col) {
+			if(board.board[newRow][Col]!=null) {
+				return false;
+			}
+			Col += inc;
+		}
+		if(board.board[newRow][newCol]==null || board.board[newRow][newCol].isWhite != this.isWhite) {
+			Board editedBoard = board.copy();
+			editedBoard.board[this.row][this.col] = null;
+			editedBoard.board[newRow][newCol] = this.copy();
+			editedBoard.board[newRow][newCol].row = newRow;
+			editedBoard.board[newRow][newCol].col = newCol;
+			if(editedBoard.kingChecked(this.isWhite)) {
+				return false;
+			}
+			this.row = newRow;
+			this.col = newCol;
+			board = editedBoard;
+			return true;
+		}
+		return false;
+	}
+	
 	public abstract boolean checkMove(int newRow, int newCol, Board board);
+	
+	public abstract ChessPiece copy();
 	
 	public String toString() {
 		if(this.isWhite) {

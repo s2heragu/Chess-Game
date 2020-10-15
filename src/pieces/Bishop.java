@@ -17,4 +17,8 @@ public class Bishop extends ChessPiece {
 		return false;
 	}
 
+	public ChessPiece copy() {
+		return new Bishop(this.row(),this.col(),this.isWhite());
+	}
+
 }
