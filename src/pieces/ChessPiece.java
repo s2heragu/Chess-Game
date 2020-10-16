@@ -80,9 +80,14 @@ public abstract class ChessPiece {
 	protected void setType(char type) {
 		this.type = type;
 	}
-
+	
+	/**
+	 * Checks if input coordinate is valid
+	 * @param newRow	the row of the new coordinate
+	 * @param newCol	the column of the new coordinate
+	 */
 	protected boolean errorCheck(int newRow, int newCol) {
-		if(newRow > 7 || newCol > 7 || newRow < 0 || newCol < 0) {
+		if(newRow > 8 || newCol > 8 || newRow < 1 || newCol < 1) {
 			return true;
 		}
 		if(newRow == this.row() && newCol == this.col()) {
@@ -91,6 +96,13 @@ public abstract class ChessPiece {
 		return false;
 	}
 	
+	/**
+	 * Checks if input coordinate is a valid diagonal move
+	 * @param newRow	the row of the new coordinate
+	 * @param newCol	the column of the new coordinate
+	 * @param board		the chess board
+	 * @return 			true if valid, false if not	
+	 */
 	protected boolean diagCheck(int newRow, int newCol, Board board) {
 		if(Math.abs(newRow-this.row()) == Math.abs(newCol - this.col())) {
 			int rowInc = 1;
@@ -128,6 +140,13 @@ public abstract class ChessPiece {
 		return false;
 	}
 	
+	/**
+	 * Checks if input coordinate is a valid vertical move
+	 * @param newRow	the row of the new coordinate
+	 * @param newCol	the column of the new coordinate
+	 * @param board		the chess board
+	 * @return 			true if valid, false if not	
+	 */
 	protected boolean vertCheck(int newRow, int newCol, Board board) {
 		if(newCol != this.col) {
 			return false;
@@ -160,6 +179,13 @@ public abstract class ChessPiece {
 		return false;
 	}
 	
+	/**
+	 * Checks if input coordinate is a valid horizontal move
+	 * @param newRow	the row of the new coordinate
+	 * @param newCol	the column of the new coordinate
+	 * @param board		the chess board
+	 * @return 			true if valid, false if not	
+	 */
 	protected boolean horizCheck(int newRow, int newCol, Board board) {
 		if(newRow != this.row) {
 			return false;
@@ -192,10 +218,23 @@ public abstract class ChessPiece {
 		return false;
 	}
 	
+	/**
+	 * Checks if input coordinate is a valid chess move
+	 * @param newRow	the row of the new coordinate
+	 * @param newCol	the column of the new coordinate
+	 * @param board		the chess board
+	 * @return 			true if valid, false if not	
+	 */
 	public abstract boolean checkMove(int newRow, int newCol, Board board);
 	
+	/**
+	 * Returns a copy of the chess piece.
+	 */
 	public abstract ChessPiece copy();
 	
+	/**
+	 * Returns the string representation of the piece
+	 */
 	public String toString() {
 		if(this.isWhite) {
 			return "w"+this.type;
