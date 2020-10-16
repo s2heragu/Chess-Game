@@ -764,7 +764,7 @@ public class Board{
 					}
 					//There is a chess piece, use its toString method
 					else {
-						
+						result += board[row][col].toString();
 					}
 				}
 				//Odd row, shade every odd column
@@ -778,7 +778,7 @@ public class Board{
 						}
 					}
 					else {
-						
+						result += board[row][col].toString();
 					}
 				}
 				result+=" ";
