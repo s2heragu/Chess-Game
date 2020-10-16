@@ -80,9 +80,7 @@ public abstract class ChessPiece {
 	protected void setType(char type) {
 		this.type = type;
 	}
-	/**
-	 * Sets row
-	 */
+
 	protected boolean errorCheck(int newRow, int newCol) {
 		if(newRow > 7 || newCol > 7 || newRow < 0 || newCol < 0) {
 			return true;

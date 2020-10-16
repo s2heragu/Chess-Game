@@ -2,20 +2,53 @@ package chess;
 import pieces.*;
 
 public class Board{
+	
 	public ChessPiece[][] board;
 	
+	public boolean isWhiteTurn;
 	
-	/*
+	/**
+	 * 
 	 */
 	public Board() {
 		//Start game with new board
 		this.board = new ChessPiece[9][9];
+		this.isWhiteTurn = true;
 		System.out.println(board[0][0]); // null, this is correct
 	}
 	
-	//checks if the king is checked;
-	public boolean kingChecked(boolean white) {
-		return false;
+	/**
+	 * Checks if King on opposing team got checked upon most recent move
+	 * @return result Boolean to determine whether King is checked
+	 */
+	public boolean kingChecked() {
+		boolean result = true;
+		//Dummy values
+		King k = new King(-1, -1, true);
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 1; j <= 8; j++) {
+				if(board[i][j].type() == 'K') {
+					
+					//White makes move that checks black King
+					if(isWhiteTurn && !board[i][j].isWhite()) {
+						k = (King) board[i][j];
+					}
+					//Black makes move that checks white king
+					//Change turn after this check, this can be changed
+					else if (!isWhiteTurn && board[i][j].isWhite()) {
+						k = (King) board[i][j];
+					}
+					
+				}
+			}
+		}
+		
+		//Check diagonals
+		
+		
+		
+		
+		return result;
 	}
 	
 	//makes a copy of the Board
