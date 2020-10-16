@@ -54,15 +54,18 @@ public class Board{
 	}
 	
 	/**
-	 * 
+	 * Moves a piece to destination without checking for legality
 	 * @param row	destination row
 	 * @param col	destination column
 	 * @param piece	Chess Piece to be moved
 	 */
 	public void movePieceNoCheck(int row, int col, ChessPiece piece) {
+		int currRow = piece.row();
+		int currCol = piece.col();
 		board[row][col] = piece;
 		piece.setRow(row);
 		piece.setCol(col);
+		board[currRow][currCol] = null;
 	}
 	
 	/**
