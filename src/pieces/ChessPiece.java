@@ -123,18 +123,7 @@ public abstract class ChessPiece {
 				Col += colInc;
 			}
 			if(board.board[Row][Col]==null || board.board[Row][Col].isWhite != this.isWhite) {
-				Board editedBoard = board.copy();
-				editedBoard.board[this.row][this.col] = null;
-				editedBoard.board[newRow][newCol] = this.copy();
-				editedBoard.board[newRow][newCol].row = newRow;
-				editedBoard.board[newRow][newCol].col = newCol;
-				if(editedBoard.kingChecked(this.isWhite)) {
-					return false;
-				}
-				this.row = newRow;
-				this.col = newCol;
-				board = editedBoard;
-				return true;
+				return !testDupMove(newRow,newCol,board);
 			}
 		}
 		return false;
@@ -163,18 +152,7 @@ public abstract class ChessPiece {
 			Row += inc;
 		}
 		if(board.board[newRow][newCol]==null || board.board[newRow][newCol].isWhite != this.isWhite) {
-			Board editedBoard = board.copy();
-			editedBoard.board[this.row][this.col] = null;
-			editedBoard.board[newRow][newCol] = this.copy();
-			editedBoard.board[newRow][newCol].row = newRow;
-			editedBoard.board[newRow][newCol].col = newCol;
-			if(editedBoard.kingChecked(this.isWhite)) {
-				return false;
-			}
-			this.row = newRow;
-			this.col = newCol;
-			board = editedBoard;
-			return true;
+			return !testDupMove(newRow,newCol,board);
 		}
 		return false;
 	}
@@ -202,20 +180,25 @@ public abstract class ChessPiece {
 			Col += inc;
 		}
 		if(board.board[newRow][newCol]==null || board.board[newRow][newCol].isWhite != this.isWhite) {
-			Board editedBoard = board.copy();
-			editedBoard.board[this.row][this.col] = null;
-			editedBoard.board[newRow][newCol] = this.copy();
-			editedBoard.board[newRow][newCol].row = newRow;
-			editedBoard.board[newRow][newCol].col = newCol;
-			if(editedBoard.kingChecked(this.isWhite)) {
-				return false;
-			}
-			this.row = newRow;
-			this.col = newCol;
-			board = editedBoard;
-			return true;
+			return !testDupMove(newRow,newCol,board);
 		}
 		return false;
+	}
+	
+	/**
+	 * Checks if a move results in the king being checked
+	 * @param newRow	the row of the new coordinate
+	 * @param newCol	the column of the new coordinate
+	 * @param board		the chess board
+	 * @return 			true if king is checked, false if not	
+	 */
+	protected boolean testDupMove(int newRow, int newCol, Board board) {
+		Board editedBoard = board.copy();
+		editedBoard.board[this.row()][this.col()] = null;
+		editedBoard.board[newRow][newCol] = this.copy();
+		editedBoard.board[newRow][newCol].setRow(newRow);
+		editedBoard.board[newRow][newCol].setCol(newCol);
+		return board.kingChecked(this.isWhite());
 	}
 	
 	/**
