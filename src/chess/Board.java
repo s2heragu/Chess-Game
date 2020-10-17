@@ -92,9 +92,11 @@ public class Board{
 		//Find king on kingTeam
 		for(int i = 1; i <= 8; i++) {
 			for(int j = 1; j <= 8; j++) {
-				if(board[i][j].type() == 'K') {
-					if(board[i][j].isWhite() == kingTeam) {
-						k = (King) board[i][j];
+				if(board[i][j] != null) {
+					if(board[i][j].type() == 'K') {
+						if(board[i][j].isWhite() == kingTeam) {
+							k = (King) board[i][j];
+						}
 					}
 				}
 			}
@@ -102,11 +104,13 @@ public class Board{
 		
 		for(int i = 1; i <= 8; i++) {
 			for(int j = 1; j <= 8; j++) {
-				//Enemy team, check if enemy can attack location of the king
-				if(board[i][j].isWhite() != kingTeam) {
-					//Can this piece attack the king location, if so in check
-					if(board.[i][j].canAttack(k.row(), k.col(), board)) {
-						return true;
+				if(board[i][j] != null) {
+					//Enemy team, check if enemy can attack location of the king
+					if(board[i][j].isWhite() != kingTeam) {
+						//Can this piece attack the king location, if so in check
+						if(board.[i][j].canAttack(k.row(), k.col(), board)) {
+							return true;
+						}
 					}
 				}
 			}
@@ -121,10 +125,12 @@ public class Board{
 	public boolean isCheckMate(boolean kingTeam) {
 		for(int i = 1; i <= 8; i++) {
 			for(int j = 1; j <= 8; j++) {
-				//Same team, check legal moves
-				if(board[i][j].isWhite() == kingTeam) {
-					if(board.[i][j].existsLegalMove(board)) {
-						return false;
+				if(board[i][j] != null) {
+					//Same team, check legal moves
+					if(board[i][j].isWhite() == kingTeam) {
+						if(board.[i][j].existsLegalMove(board)) {
+							return false;
+						}
 					}
 				}
 			}
