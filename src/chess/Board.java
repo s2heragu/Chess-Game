@@ -1,14 +1,28 @@
 package chess;
 import pieces.*;
 
+/**
+ * 
+ * Class to represent chess board
+ * @author Jonathan Wong, Shreyas Heragu
+ *
+ */
 public class Board{
 	
+	/**
+	 * 2D array of ChessPieces to store chess game state
+	 */
 	public ChessPiece[][] board;
 	
+	/**
+	 * boolean to represent white or black team's turn,
+	 * true if white turn,
+	 * false if black turn
+	 */
 	public boolean isWhiteTurn;
 	
 	/**
-	 * Initializes board with chess pieces and starts as white team's turn
+	 * Class Constructor to initialize board with chess pieces and starts as white team's turn
 	 */
 	public Board() {
 		//Start game with new board
@@ -70,7 +84,7 @@ public class Board{
 	
 	/**
 	 * Determines whether game is in check mate
-	 * @return result boolean that is true if check mated, false otherwise
+	 * @return boolean that is true if check mated, false otherwise
 	 */
 	public boolean isCheckMate(boolean kingTeam) {
 		boolean result = true;
@@ -108,11 +122,30 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
 					//Can we defend it and no longer be in check
 					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
+				}
+				//Not free to move to
+				else {
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
 						if(isSpotAttacked(row, col, kingTeam)) {
 							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
 							tempBoard.movePieceNoCheck(row, col, defender);
@@ -136,18 +169,37 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
+					//Can we defend it and no longer be in check
+					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
 				}
-				//Can we defend it and no longer be in check
+				//Not free to move to
 				else {
-					if(isSpotAttacked(row, col, kingTeam)) {
-						ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
-						tempBoard.movePieceNoCheck(row, col, defender);
-						//Not checked after moving
-						if(!tempBoard.kingChecked(kingTeam)) {
-							return false;
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -166,18 +218,37 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
+					//Can we defend it and no longer be in check
+					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
 				}
-				//Can we defend it and no longer be in check
+				//Not free to move to
 				else {
-					if(isSpotAttacked(row, col, kingTeam)) {
-						ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
-						tempBoard.movePieceNoCheck(row, col, defender);
-						//Not checked after moving
-						if(!tempBoard.kingChecked(kingTeam)) {
-							return false;
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -193,18 +264,37 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
+					//Can we defend it and no longer be in check
+					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
 				}
-				//Can we defend it and no longer be in check
+				//Not free to move to
 				else {
-					if(isSpotAttacked(row, col, kingTeam)) {
-						ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
-						tempBoard.movePieceNoCheck(row, col, defender);
-						//Not checked after moving
-						if(!tempBoard.kingChecked(kingTeam)) {
-							return false;
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -221,18 +311,37 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
+					//Can we defend it and no longer be in check
+					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
 				}
-				//Can we defend it and no longer be in check
+				//Not free to move to
 				else {
-					if(isSpotAttacked(row, col, kingTeam)) {
-						ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
-						tempBoard.movePieceNoCheck(row, col, defender);
-						//Not checked after moving
-						if(!tempBoard.kingChecked(kingTeam)) {
-							return false;
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -248,18 +357,37 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
+					//Can we defend it and no longer be in check
+					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
 				}
-				//Can we defend it and no longer be in check
+				//Not free to move to
 				else {
-					if(isSpotAttacked(row, col, kingTeam)) {
-						ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
-						tempBoard.movePieceNoCheck(row, col, defender);
-						//Not checked after moving
-						if(!tempBoard.kingChecked(kingTeam)) {
-							return false;
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -276,18 +404,37 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
+					//Can we defend it and no longer be in check
+					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
 				}
-				//Can we defend it and no longer be in check
+				//Not free to move to
 				else {
-					if(isSpotAttacked(row, col, kingTeam)) {
-						ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
-						tempBoard.movePieceNoCheck(row, col, defender);
-						//Not checked after moving
-						if(!tempBoard.kingChecked(kingTeam)) {
-							return false;
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -303,27 +450,43 @@ public class Board{
 				//Other spot has to be free to move to
 				if(board[row][col] == null) {
 					//This spot has to be attacked by other team
+					//Not attacked, free to move to not in checkmate
 					if(!isSpotAttacked(row, col, !kingTeam)) {
 						return false;
 					}
+					//Can we defend it and no longer be in check
+					else {
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
+						}
+					}
 				}
-				//Can we defend it and no longer be in check
+				//Not free to move to
 				else {
-					if(isSpotAttacked(row, col, kingTeam)) {
-						ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
-						tempBoard.movePieceNoCheck(row, col, defender);
-						//Not checked after moving
-						if(!tempBoard.kingChecked(kingTeam)) {
-							return false;
+					//Occupied by teammate or enemy
+					if(board[row][col].isWhite() == kingTeam) {
+						//ignore teammate
+					}
+					else {
+						//Enemy, can we kill enemy and not be in check
+						if(isSpotAttacked(row, col, kingTeam)) {
+							ChessPiece defender = tempBoard.spotAttacker(row, col, kingTeam);
+							tempBoard.movePieceNoCheck(row, col, defender);
+							//Not checked after moving
+							if(!tempBoard.kingChecked(kingTeam)) {
+								return false;
+							}
 						}
 					}
 				}
 			}
 		}
-		
-		
-		
-		
+
 		return result;
 	}
 	
@@ -704,7 +867,7 @@ public class Board{
 	/**
 	 * Checks if King on opposing team got checked upon most recent move
 	 * @param kingTeam checks if this king's team is checked
-	 * @return result Boolean to determine whether King is checked
+	 * @return  Boolean to determine whether King is checked
 	 */
 	public boolean kingChecked(boolean kingTeam) {
 		boolean result = false;
@@ -732,7 +895,10 @@ public class Board{
 		return result;
 	}
 	
-	//makes a copy of the Board
+	/**
+	 * Copy's game state into another instance of the Board Class
+	 * @return Copied instance of the Board class
+	 */
 	public Board copy() {
 		Board copy = new Board();
 		for(int i = 0; i < 9;i++) {
@@ -742,7 +908,10 @@ public class Board{
 		}
 		return copy;
 	}
-	
+	/**
+	 * Returns the string representation of the board in ASCII art
+	 * @return string representation of chess board
+	 */
 	public String toString() {
 		
 		//Rows go from down up
@@ -794,7 +963,7 @@ public class Board{
 	 * Gets the chess piece at location
 	 * @param row the row of the piece
 	 * @param col the column of the piece
-	 * @return returns a chess piece at the location, null if none is there
+	 * @return ChessPiece at location, null if none
 	 */
 	public ChessPiece get(int row, int col) {
 		return board[row][col];
