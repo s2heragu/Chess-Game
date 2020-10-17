@@ -105,7 +105,7 @@ public class Board{
 				//Enemy team, check if enemy can attack location of the king
 				if(board[i][j].isWhite() != kingTeam) {
 					//Can this piece attack the king location, if so in check
-					if(board.[i][j].canAttack(k.row(), k.col())) {
+					if(board.[i][j].canAttack(k.row(), k.col(), board)) {
 						return true;
 					}
 				}
