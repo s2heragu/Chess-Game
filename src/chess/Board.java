@@ -83,10 +83,28 @@ public class Board{
 	}
 	
 	/**
-	 * Determines whether game is in check mate
+	 * Determines whether game is in check mate for a team
+	 * @param kingTeam true if king to check for checkmate on is white, black if false
 	 * @return boolean that is true if check mated, false otherwise
 	 */
 	public boolean isCheckMate(boolean kingTeam) {
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 1; j <= 8; j++) {
+				//Same team, check legal moves
+				if(board[i][j].isWhite() == kingTeam) {
+					if(board.[i][j].existsLegalMove(board)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	/**
+	 * Determines whether game is in check mate, TODO rmeove this soon
+	 * @return boolean that is true if check mated, false otherwise
+	 */
+	public boolean badCheckMate(boolean kingTeam) {
 		boolean result = true;
 		//Dummy values
 		King k = new King(-1, -1, true);
@@ -901,9 +919,12 @@ public class Board{
 	 */
 	public Board copy() {
 		Board copy = new Board();
+		copy.board = new ChessPiece[9][9];
 		for(int i = 0; i < 9;i++) {
 			for(int j = 0; j<9; j++) {
-				copy.board[i][j] = this.board[i][j];
+				if(this.get(i, j) != null) {
+					copy.board[i][j] = this.get(i, j).copy();
+				}
 			}
 		}
 		return copy;
