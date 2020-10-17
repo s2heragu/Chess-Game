@@ -83,6 +83,37 @@ public class Board{
 	}
 	
 	/**
+	 * Checks if King on opposing team got checked upon most recent move
+	 * @param kingTeam checks if this king's team is checked
+	 * @return  Boolean to determine whether King is checked
+	 */
+	public boolean isKingChecked(boolean kingTeam) {
+		King k = new King(-1, -1, true);
+		//Find king on kingTeam
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 1; j <= 8; j++) {
+				if(board[i][j].type() == 'K') {
+					if(board[i][j].isWhite() == kingTeam) {
+						k = (King) board[i][j];
+					}
+				}
+			}
+		}
+		
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 1; j <= 8; j++) {
+				//Enemy team, check if enemy can attack location of the king
+				if(board[i][j].isWhite() != kingTeam) {
+					//Can this piece attack the king location, if so in check
+					if(board.[i][j].canAttack(k.row(), k.col())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	/**
 	 * Determines whether game is in check mate for a team
 	 * @param kingTeam true if king to check for checkmate on is white, black if false
 	 * @return boolean that is true if check mated, false otherwise
@@ -672,11 +703,11 @@ public class Board{
 			col--;
 		}
 		
-		//Left
+		//right
 		row = attackRow;
 		col = attackCol;
 		col++;
-		while(col > 0) {
+		while(col <= 8) {
 			if(board[row][col] != null) {
 				ChessPiece other = board[row][col];
 				if(other.isWhite() == isWhiteTeam) {
@@ -697,7 +728,7 @@ public class Board{
 		row = attackRow;
 		col = attackCol;
 		row--;
-		while(col > 0) {
+		while(row > 0) {
 			if(board[row][col] != null) {
 				ChessPiece other = board[row][col];
 				if(other.isWhite() == isWhiteTeam) {
@@ -718,7 +749,7 @@ public class Board{
 		row = attackRow;
 		col = attackCol;
 		row++;
-		while(col > 0) {
+		while(row <= 8) {
 			if(board[row][col] != null) {
 				ChessPiece other = board[row][col];
 				if(other.isWhite() == isWhiteTeam) {
@@ -883,11 +914,11 @@ public class Board{
 	}
 	
 	/**
-	 * Checks if King on opposing team got checked upon most recent move
+	 * Checks if King on opposing team got checked upon most recent move, TODO remove this if possible
 	 * @param kingTeam checks if this king's team is checked
 	 * @return  Boolean to determine whether King is checked
 	 */
-	public boolean kingChecked(boolean kingTeam) {
+	public boolean badKingChecked(boolean kingTeam) {
 		boolean result = false;
 		//Dummy values
 		King k = new King(-1, -1, true);
