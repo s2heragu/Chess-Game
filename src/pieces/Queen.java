@@ -9,6 +9,31 @@ public class Queen extends ChessPiece {
 	}
 
 	public boolean checkMove(int newRow, int newCol, Board board) {
+		if(canAttack(newRow,newCol,board)) {
+			return !testDupMove(newRow,newCol,board);
+		}
+		return false;
+		/*if(errorCheck(newRow,newCol)) {
+			return false;
+		}
+		if(vertCheck(newRow,newCol,board)) {
+			return true;
+		}
+		if(horizCheck(newRow,newCol,board)) {
+			return true;
+		}
+		if(diagCheck(newRow,newCol,board)) {
+			return true;
+		}
+		return false;*/
+	}
+	
+	public ChessPiece copy() {
+		return new Queen(this.row(),this.col(),this.isWhite());
+	}
+
+	@Override
+	public boolean canAttack(int newRow, int newCol, Board board) {
 		if(errorCheck(newRow,newCol)) {
 			return false;
 		}
@@ -22,10 +47,6 @@ public class Queen extends ChessPiece {
 			return true;
 		}
 		return false;
-	}
-	
-	public ChessPiece copy() {
-		return new Queen(this.row(),this.col(),this.isWhite());
 	}
 
 

@@ -87,7 +87,7 @@ public class Board{
 	 * @param kingTeam checks if this king's team is checked
 	 * @return  Boolean to determine whether King is checked
 	 */
-	public boolean isKingChecked(boolean kingTeam) {
+	public boolean kingChecked(boolean kingTeam) {
 		King k = new King(-1, -1, true);
 		//Find king on kingTeam
 		for(int i = 1; i <= 8; i++) {
@@ -108,7 +108,7 @@ public class Board{
 					//Enemy team, check if enemy can attack location of the king
 					if(board[i][j].isWhite() != kingTeam) {
 						//Can this piece attack the king location, if so in check
-						if(board.[i][j].canAttack(k.row(), k.col(), board)) {
+						if(board[i][j].canAttack(k.row(), k.col(), this)) {
 							return true;
 						}
 					}
@@ -128,7 +128,7 @@ public class Board{
 				if(board[i][j] != null) {
 					//Same team, check legal moves
 					if(board[i][j].isWhite() == kingTeam) {
-						if(board.[i][j].existsLegalMove(board)) {
+						if(board[i][j].existsLegalMove(this)) {
 							return false;
 						}
 					}

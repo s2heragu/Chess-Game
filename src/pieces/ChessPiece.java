@@ -123,7 +123,8 @@ public abstract class ChessPiece {
 				Col += colInc;
 			}
 			if(board.board[Row][Col]==null || board.board[Row][Col].isWhite != this.isWhite) {
-				return !testDupMove(newRow,newCol,board);
+				return true;
+				//return !testDupMove(newRow,newCol,board);
 			}
 		}
 		return false;
@@ -152,7 +153,8 @@ public abstract class ChessPiece {
 			Row += inc;
 		}
 		if(board.board[newRow][newCol]==null || board.board[newRow][newCol].isWhite != this.isWhite) {
-			return !testDupMove(newRow,newCol,board);
+			return true;
+			//return !testDupMove(newRow,newCol,board);
 		}
 		return false;
 	}
@@ -180,7 +182,8 @@ public abstract class ChessPiece {
 			Col += inc;
 		}
 		if(board.board[newRow][newCol]==null || board.board[newRow][newCol].isWhite != this.isWhite) {
-			return !testDupMove(newRow,newCol,board);
+			return true;
+			//return !testDupMove(newRow,newCol,board);
 		}
 		return false;
 	}
@@ -202,6 +205,22 @@ public abstract class ChessPiece {
 	}
 	
 	/**
+	 * Checks if a legal move exists, by parsing through the entire board
+	 * @param board		the chess board
+	 * @return 			true if a legal move exists
+	 */
+	public boolean existsLegalMove(Board board) {
+		for(int i = 1;i<9;i++) {
+			for(int j = 1;j<9;j++) {
+				if(this.checkMove(i, j, board)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Checks if input coordinate is a valid chess move
 	 * @param newRow	the row of the new coordinate
 	 * @param newCol	the column of the new coordinate
@@ -209,6 +228,8 @@ public abstract class ChessPiece {
 	 * @return 			true if valid, false if not	
 	 */
 	public abstract boolean checkMove(int newRow, int newCol, Board board);
+	
+	public abstract boolean canAttack(int newRow, int newCol, Board board);
 	
 	/**
 	 * Returns a copy of the chess piece.
