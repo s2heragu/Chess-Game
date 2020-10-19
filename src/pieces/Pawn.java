@@ -23,7 +23,9 @@ public class Pawn extends ChessPiece{
 	 * @return Returns a new pawn copied instance
 	 */
 	public ChessPiece copy() {
-		return new Pawn(this.row(),this.col(),this.isWhite());
+		Pawn p = new Pawn(this.row(),this.col(),this.isWhite());
+		p.setHasMoved(this.hasMoved());
+		return p;
 	}
 	
 	/**
