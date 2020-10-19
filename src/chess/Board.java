@@ -9,6 +9,7 @@ import pieces.*;
  */
 public class Board{
 	
+
 	/**
 	 * Integer to represent the state of the game
 	 * 1 = white wins
@@ -76,6 +77,24 @@ public class Board{
 		
 	}
 	
+	
+	/**
+	 * Given a valid input, perform the move option
+	 * @param move the user input that has been validated
+	 */
+	public void performMove(String move) {
+		//Split by spaces
+		String[] info = move.split(" ");
+		String from = info[0];
+		String to = info[1];
+		int fromRow = Character.getNumericValue(from.charAt(1));
+		int fromCol = charToCol(from.charAt(0));
+		int toRow = Character.getNumericValue(to.charAt(1));
+		int toCol = charToCol(to.charAt(0));
+		ChessPiece piece = board[fromRow][fromCol];
+		this.movePieceNoCheck(toRow, toCol, piece);
+	}
+	
 	/**
 	 * Method to determine if a move input is legal or not
 	 * @param move the string representing where to move a piece "FileRank FileRank otherInfo"
@@ -88,13 +107,27 @@ public class Board{
 		String to = info[1];
 		int fromRow = Character.getNumericValue(from.charAt(1));
 		int fromCol = charToCol(from.charAt(0));
-		int toRow = Character.getNumericValue(to.charAt(0));
+		int toRow = Character.getNumericValue(to.charAt(1));
 		int toCol = charToCol(to.charAt(0));
 		ChessPiece piece = board[fromRow][fromCol];
 		if(piece == null) {
 			return false;
 		}
+		//Trying to move wrong team piece
+		if(this.isWhiteTurn != piece.isWhite()) {
+			return false;
+		}
+
+		//Legality
 		if(piece.checkMove(toRow, toCol, this)) {
+			if(info.length == 3) {
+				if(info[2].equals("draw?")) {
+					
+				}
+				else {
+					//TODO Promotion
+				}
+			}
 			return true;
 		}
 		return false;
