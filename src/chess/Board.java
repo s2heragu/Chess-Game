@@ -10,6 +10,14 @@ import pieces.*;
 public class Board{
 	
 	/**
+	 * Integer to represent the state of the game
+	 * 1 = white wins
+	 * 0 = draw
+	 * -1 = black wins
+	 */
+	public int gameState;
+	
+	/**
 	 * 2D array of ChessPieces to store chess game state
 	 */
 	public ChessPiece[][] board;
@@ -28,6 +36,7 @@ public class Board{
 		//Start game with new board
 		this.board = new ChessPiece[9][9];
 		this.isWhiteTurn = true;
+		gameState = 0;
 		board[1][1] = new Rook(1, 1, true);
 		board[1][2] = new Knight(1, 2, true);
 		board[1][3] = new Bishop(1, 3, true);
@@ -66,6 +75,84 @@ public class Board{
 		board[8][8] = new Rook(8, 8, false);
 		
 	}
+	
+	/**
+	 * Method to determine if a move input is legal or not
+	 * @param move the string representing where to move a piece "FileRank FileRank otherInfo"
+	 * @return returns true if move is legal, false otherwise
+	 */
+	public boolean parseMove(String move) {
+		//Split by spaces
+		String[] info = move.split(" ");
+		String from = info[0];
+		String to = info[1];
+		int fromRow = Character.getNumericValue(from.charAt(1));
+		int fromCol = charToCol(from.charAt(0));
+		int toRow = Character.getNumericValue(to.charAt(0));
+		int toCol = charToCol(to.charAt(0));
+		ChessPiece piece = board[fromRow][fromCol];
+		if(piece == null) {
+			return false;
+		}
+		if(piece.checkMove(toRow, toCol, this)) {
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * Method to map a column character to the numerical representation of the column
+	 * @param colChar Column in the chess board
+	 * @return integer mapping of the column
+	 */
+	private int charToCol(char colChar) {
+		if(colChar == 'a') {
+			return 1;
+		}
+		else if(colChar == 'b') {
+			return 2;
+		}
+		else if(colChar == 'c') {
+			return 3;
+		}
+		else if(colChar == 'd') {
+			return 4;
+		}
+		else if(colChar == 'e') {
+			return 5;
+		}
+		else if(colChar == 'f') {
+			return 6;
+		}
+		else if(colChar == 'g') {
+			return 7;
+		}
+		else if(colChar == 'h') {
+			return 8;
+		}
+		return 0;
+	}
+	
+	/**
+	 * Clears the enpassant status of the corresponding team's pawns
+	 * Occurs when opposing team fails to act on enpassant opportunity
+	 * @param isWhite team color we want to clear enpassant status from
+	 */
+	public void clearEnpassant(boolean isWhite) {
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 1; j <= 8; j++) {
+				if(this.board[i][j] != null) {
+					ChessPiece curr = this.board[i][j];
+					if(curr.type() == 'p') {
+						if(curr.isWhite() == isWhite) {
+							Pawn pawn = (Pawn) curr;
+							pawn.canEnPassant = false;
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	
 	/**
 	 * Moves a piece to destination without checking for legality
