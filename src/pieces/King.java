@@ -101,6 +101,7 @@ public class King extends ChessPiece {
 		editedBoard.board[this.row()][this.col()] = null;
 		editedBoard.board[this.row()][newCol] = this.copy();
 		editedBoard.get(this.row(),newCol).setCol(newCol);
+		editedBoard.get(this.row(),newCol).move();
 		
 		//variable to help determine where to place rook
 		int inc = 0;
@@ -118,6 +119,7 @@ public class King extends ChessPiece {
 		editedBoard.board[this.row()][newCol+inc] = editedBoard.get(this.row(), rookCol);
 		editedBoard.board[this.row()][rookCol] = null;
 		editedBoard.get(this.row(), newCol+inc).setCol(newCol+inc);
+		editedBoard.get(this.row(), newCol+inc).move();
 		
 		//return whether king is checked as a result or not
 		return editedBoard.kingChecked(this.isWhite());

@@ -1,7 +1,12 @@
 package pieces;
 
 import chess.Board;
-
+/**
+ * 
+ * Class that represents a Queen.
+ * @author Jonathan Wong, Shreyas Heragu
+ *
+ */
 public class Queen extends ChessPiece {
 	/**
 	 * Constructor to initialize row, column and team. Sets type to 'Q'.

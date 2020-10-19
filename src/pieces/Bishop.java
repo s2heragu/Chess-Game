@@ -1,6 +1,11 @@
 package pieces;
 import chess.Board;
-
+/**
+ * 
+ * Class that represents a Bishop.
+ * @author Jonathan Wong, Shreyas Heragu
+ *
+ */
 public class Bishop extends ChessPiece {
 	
 	/**

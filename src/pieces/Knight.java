@@ -1,7 +1,12 @@
 package pieces;
 
 import chess.Board;
-
+/**
+ * 
+ * Class that represents a Knight.
+ * @author Jonathan Wong, Shreyas Heragu
+ *
+ */
 public class Knight extends ChessPiece {
 	/**
 	 * Constructor to initialize row, column and team. Initializes type to 'N'.

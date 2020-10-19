@@ -1,7 +1,12 @@
 package pieces;
 
 import chess.Board;
-
+/**
+ * 
+ * Class that represents a Pawn.
+ * @author Jonathan Wong, Shreyas Heragu
+ *
+ */
 public class Pawn extends ChessPiece{
 	/**
 	 * Variable to determine if this piece can be attacked through an en passant
