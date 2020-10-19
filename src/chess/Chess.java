@@ -43,6 +43,7 @@ public class Chess {
 			
 			//Check
 			if(board.kingChecked(board.isWhiteTurn) && !dontDisplay) {
+				System.out.println();
 				System.out.println("Check");
 			}
 			
@@ -58,8 +59,10 @@ public class Chess {
 			if(board.parseMove(input)) {
 				//Valid input
 				dontDisplay = false;
-				//Do the move
+				//Do the move, enpassant should be set up here
 				board.performMove(input);
+				//Forfeit enpassant on opposing team pawns
+				board.clearEnpassant(!board.isWhiteTurn);
 				// Swap turn
 				board.isWhiteTurn = !board.isWhiteTurn;
 			}

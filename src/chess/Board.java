@@ -196,10 +196,38 @@ public class Board{
 	public void movePieceNoCheck(int row, int col, ChessPiece piece) {
 		int currRow = piece.row();
 		int currCol = piece.col();
+		boolean movingToNull = false;
+		if(board[row][col] == null) {
+			movingToNull = true;
+		}
 		board[row][col] = piece;
 		piece.setRow(row);
 		piece.setCol(col);
 		board[currRow][currCol] = null;
+		//Set up enpassant
+		if(piece.type() == 'p') {
+			Pawn pawn = (Pawn)piece;
+			//Moved 2 spaces, can be attacked by enpassant for one turn
+			if(Math.abs(row - currRow) == 2) {
+				pawn.canEnPassant = true;
+			}
+			//Check if enpassant is performed, eat the piece
+			else if(pawn.isWhite()) {
+				if(movingToNull) {
+					if(currCol != pawn.col()) {
+						board[pawn.row() - 1][pawn.col()] = null;
+					}
+				}
+			}
+			else if(!pawn.isWhite()) {
+				if(movingToNull) {
+					if(currCol != pawn.col()) {
+						board[pawn.row() + 1][pawn.col()] = null;
+					}
+				}
+			}
+		}
+		//Promotion
 	}
 	
 	/**
