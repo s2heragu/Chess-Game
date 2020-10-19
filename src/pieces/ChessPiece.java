@@ -201,7 +201,7 @@ public abstract class ChessPiece {
 		editedBoard.board[newRow][newCol] = this.copy();
 		editedBoard.board[newRow][newCol].setRow(newRow);
 		editedBoard.board[newRow][newCol].setCol(newCol);
-		return board.kingChecked(this.isWhite());
+		return editedBoard.kingChecked(this.isWhite);
 	}
 	
 	/**
@@ -221,14 +221,26 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Checks if input coordinate is a valid chess move
+	 * Checks if input coordinate is a valid chess move. Accounts for checks by calling testDupMove.
 	 * @param newRow	the row of the new coordinate
 	 * @param newCol	the column of the new coordinate
 	 * @param board		the chess board
 	 * @return 			true if valid, false if not	
 	 */
-	public abstract boolean checkMove(int newRow, int newCol, Board board);
+	public boolean checkMove(int newRow, int newCol, Board board) {
+		if(canAttack(newRow,newCol,board)) {
+			return !testDupMove(newRow,newCol,board);
+		}
+		return false;
+	}
 	
+	/**
+	 * Checks if a move to the new coordinate is valid. Doesn't account for checks.
+	 * @param newRow	the row of the new coordinate
+	 * @param newCol	the column of the new coordinate
+	 * @param board		the chess board
+	 * @return 			true if valid, false if not	
+	 */
 	public abstract boolean canAttack(int newRow, int newCol, Board board);
 	
 	/**

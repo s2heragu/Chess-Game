@@ -25,20 +25,7 @@ public class Pawn extends ChessPiece{
 	public ChessPiece copy() {
 		return new Pawn(this.row(),this.col(),this.isWhite());
 	}
-	/**
-	 * Method to determine if a move is legal for a pawn
-	 * @param newRow destination row of the piece
-	 * @param newCol destination column of the piece
-	 * @param board Chess board class instance with current game state
-	 * @return boolean to determine whether a piece can move here legally, true if legal, false if not
-	 */
-	@Override
-	public boolean checkMove(int newRow, int newCol, Board board) {
-		if(canAttack(newRow,newCol,board)) {
-			return !testDupMove(newRow,newCol,board);
-		}
-		return false;
-	}
+	
 	/**
 	 * Method to determine if a piece can move to a spot without checking for king checked.
 	 * @param newRow destination row of the piece
@@ -47,7 +34,6 @@ public class Pawn extends ChessPiece{
 	 * @return boolean to determine whether a piece can move here without checking for king being checked, 
 	 * true if can attack, false otherwise
 	 */
-	@Override
 	public boolean canAttack(int newRow, int newCol, Board board) {
 		//Bad new row or column
 		if(errorCheck(newRow,newCol)) {

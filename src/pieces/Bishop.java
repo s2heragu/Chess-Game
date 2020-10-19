@@ -11,21 +11,19 @@ public class Bishop extends ChessPiece {
 		if(canAttack(newRow,newCol,board)) {
 			return !testDupMove(newRow,newCol,board);
 		}
-		return false;
-		/*if(errorCheck(newRow,newCol)) {
+		if(errorCheck(newRow,newCol)) {
 			return false;
 		}
 		if(diagCheck(newRow,newCol,board)) {
 			return true;
 		}
-		return false;*/
+		return false;
 	}
 
 	public ChessPiece copy() {
 		return new Bishop(this.row(),this.col(),this.isWhite());
 	}
 
-	@Override
 	public boolean canAttack(int newRow, int newCol, Board board) {
 		if(errorCheck(newRow,newCol)) {
 			return false;
