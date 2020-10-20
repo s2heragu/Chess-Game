@@ -100,7 +100,7 @@ public class Board{
 			if(piece.isWhite()) {
 				if(toRow == 8) {
 					char newType;
-					ChessPiece newPiece;
+					ChessPiece newPiece = null;
 					if(info.length == 3) {
 						newType = info[2].charAt(0);
 					}
@@ -124,6 +124,7 @@ public class Board{
 						newPiece = new Queen(toRow, toCol, piece.isWhite());
 						board[toRow][toCol] = newPiece;
 					}
+					newPiece.move();
 					
 				}
 			}
@@ -131,7 +132,7 @@ public class Board{
 			else {
 				if(toRow == 1) {
 					char newType;
-					ChessPiece newPiece;
+					ChessPiece newPiece = null;
 					if(info.length == 3) {
 						newType = info[2].charAt(0);
 					}
@@ -155,6 +156,7 @@ public class Board{
 						newPiece = new Queen(toRow, toCol, piece.isWhite());
 						board[toRow][toCol] = newPiece;
 					}
+					newPiece.move();
 					
 				}
 			}
@@ -263,6 +265,20 @@ public class Board{
 		int currRow = piece.row();
 		int currCol = piece.col();
 		boolean movingToNull = false;
+		//checking if the move is a king castle move and moving rook accordingly
+		if(piece.isValidCastle(row, col, this)) {
+			int newRookCol = 6;
+			int oldRookCol = 8;
+			if(col == 3) {
+				oldRookCol = 1;
+				newRookCol = 4;
+			}
+			ChessPiece rook = this.get(row,oldRookCol);
+			board[row][newRookCol]=rook;
+			board[row][oldRookCol] = null;
+			rook.setCol(newRookCol);
+			rook.move();
+		}
 		if(board[row][col] == null) {
 			movingToNull = true;
 		}
@@ -270,6 +286,7 @@ public class Board{
 		piece.setRow(row);
 		piece.setCol(col);
 		board[currRow][currCol] = null;
+		piece.move();
 		//Set up enpassant
 		if(piece.type() == 'p') {
 			Pawn pawn = (Pawn)piece;

@@ -52,7 +52,7 @@ public class King extends ChessPiece {
 			rook = board.get(newRow, 1);
 			
 			//checking for all empty spaces in between king and "rook"
-			for(int i = this.col();i>1;i--) {
+			for(int i = this.col()-1;i>1;i--) {
 				if(board.get(newRow, i)!=null) {
 					return false;
 				}
@@ -71,7 +71,7 @@ public class King extends ChessPiece {
 			rook = board.get(newRow, 8);
 			
 			//checking for all empty spaces in between king and "rook"
-			for(int i = this.col();i<8;i++) {
+			for(int i = this.col()+1;i<8;i++) {
 				if(board.get(newRow, i)!=null) {
 					return false;
 				}

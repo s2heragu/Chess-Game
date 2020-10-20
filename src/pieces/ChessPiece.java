@@ -334,6 +334,16 @@ public abstract class ChessPiece {
 	public abstract ChessPiece copy();
 	
 	/**
+	 * Determines whether input move is a valid castle. Only works for Kings.
+	 * @param newRow	row of destination coordinate
+	 * @param newCol	column of destination coordinate
+	 * @param board		relevant chess board
+	 * @return	true if valid, false if not
+	 */
+	public abstract boolean isValidCastle(int newRow, int newCol, Board board);
+	
+	
+	/**
 	 * Returns the string representation of the piece
 	 * @return	a string which has the team and piece type
 	 */

@@ -34,7 +34,7 @@ public class Chess {
 			
 			//Checkmate
 			//There is a checkmate
-			if(board.isCheckMate(board.isWhiteTurn)) {
+			if(board.kingChecked(board.isWhiteTurn)&&board.isCheckMate(board.isWhiteTurn)) {
 				System.out.println("Checkmate");
 				//White was checkmated
 				if(board.isWhiteTurn) {

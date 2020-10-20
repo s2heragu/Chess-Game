@@ -56,6 +56,17 @@ public class Queen extends ChessPiece {
 		}
 		return false;
 	}
+	
+	/**
+	 * Determines whether input move is a valid castle.
+	 * @param newRow	row of destination coordinate
+	 * @param newCol	column of destination coordinate
+	 * @param board		relevant chess board
+	 * @return			false since piece is not a king
+	 */
+	public boolean isValidCastle(int newRow, int newCol, Board board) {
+		return false;
+	}
 
 
 }
