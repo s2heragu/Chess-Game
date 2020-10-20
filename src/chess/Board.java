@@ -93,6 +93,72 @@ public class Board{
 		int toCol = charToCol(to.charAt(0));
 		ChessPiece piece = board[fromRow][fromCol];
 		this.movePieceNoCheck(toRow, toCol, piece);
+		piece.move();
+		//Promotion
+		if(piece.type() == 'p') {
+			//White pawn promotion
+			if(piece.isWhite()) {
+				if(toRow == 8) {
+					char newType;
+					ChessPiece newPiece;
+					if(info.length == 3) {
+						newType = info[2].charAt(0);
+					}
+					//Default to queen piece
+					else {
+						newType = 'Q';
+					}
+					if(newType == 'B') {
+						newPiece = new Bishop(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					else if(newType == 'N') {
+						newPiece = new Knight(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					else if(newType == 'R') {
+						newPiece = new Rook(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					else if(newType == 'Q') {
+						newPiece = new Queen(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					
+				}
+			}
+			//Black pawn promotion
+			else {
+				if(toRow == 1) {
+					char newType;
+					ChessPiece newPiece;
+					if(info.length == 3) {
+						newType = info[2].charAt(0);
+					}
+					//Default to queen piece
+					else {
+						newType = 'Q';
+					}
+					if(newType == 'B') {
+						newPiece = new Bishop(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					else if(newType == 'N') {
+						newPiece = new Knight(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					else if(newType == 'R') {
+						newPiece = new Rook(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					else if(newType == 'Q') {
+						newPiece = new Queen(toRow, toCol, piece.isWhite());
+						board[toRow][toCol] = newPiece;
+					}
+					
+				}
+			}
+		}
 	}
 	
 	/**
@@ -227,7 +293,6 @@ public class Board{
 				}
 			}
 		}
-		//Promotion
 	}
 	
 	/**

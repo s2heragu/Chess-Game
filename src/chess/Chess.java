@@ -1,6 +1,8 @@
 package chess;
 
 import java.util.Scanner;
+
+import pieces.*;
 /**
  * 
  * Driver class to play chess
@@ -16,6 +18,17 @@ public class Chess {
 		Scanner scanner = new Scanner(System.in);
 		
 		Board board = new Board();
+		
+//		for(int i = 1; i <= 8; i++) {
+//			for(int j = 1; j <= 8; j++) {
+//				board.board[i][j] = null;
+//			}
+//		}
+//		board.board[1][1] = new King(1, 1, true);
+//		board.board[8][1] = new King(8, 1, false);
+//		board.board[2][5] = new Pawn(1, 1, true);
+//		board.board[2][6] = new Pawn(1, 1, false);
+		
 		boolean dontDisplay = false;
 		while(true) {
 			

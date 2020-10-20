@@ -162,7 +162,7 @@ public class Pawn extends ChessPiece{
 			//Check en passant because spot is empty
 			else {
 				if(board.board[this.row()][this.col() + 1] != null) {
-					ChessPiece other = board.board[this.row()][this.col() - 1];
+					ChessPiece other = board.board[this.row()][this.col() + 1];
 					//Must be a white pawn that can be en passanted
 					if(other.type() == 'p') {
 						Pawn otherPawn = (Pawn) other;
