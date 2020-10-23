@@ -5,29 +5,20 @@ import java.util.Scanner;
 import pieces.*;
 /**
  * 
- * Driver class to play chess
- * @author Jonathan Wong, Shreyas Heragu
+ * Driver class to play chess.
+ * @author Jonathan Wong
+ * @author Shreyas Heragu
  *
  */
 public class Chess {
 	/**
-	 * Main method to start chess program
-	 * @param args input arguments in command line
+	 * Main method to start chess program.
+	 * @param args Input arguments in command line.
 	 */
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
 		Board board = new Board();
-		
-//		for(int i = 1; i <= 8; i++) {
-//			for(int j = 1; j <= 8; j++) {
-//				board.board[i][j] = null;
-//			}
-//		}
-//		board.board[1][1] = new King(1, 1, true);
-//		board.board[8][1] = new King(8, 1, false);
-//		board.board[2][5] = new Pawn(1, 1, true);
-//		board.board[2][6] = new Pawn(1, 1, false);
 		
 		boolean dontDisplay = false;
 		while(true) {
@@ -35,6 +26,8 @@ public class Chess {
 			//Checkmate
 			//There is a checkmate
 			if(board.kingChecked(board.isWhiteTurn)&&board.isCheckMate(board.isWhiteTurn)) {
+				System.out.println(board);
+				System.out.println();
 				System.out.println("Checkmate");
 				//White was checkmated
 				if(board.isWhiteTurn) {
@@ -51,12 +44,13 @@ public class Chess {
 			//Print board
 			//Do not print board if previous input was illegal
 			if(!dontDisplay) {
+				System.out.println();
 				System.out.println(board);
+				System.out.println();
 			}
 			
 			//Check
 			if(board.kingChecked(board.isWhiteTurn) && !dontDisplay) {
-				System.out.println();
 				System.out.println("Check");
 			}
 			
@@ -89,9 +83,10 @@ public class Chess {
 		}
 	}
 	/**
-	 * Method to handle resignations, draws to end the game
-	 * @param input Move from user input
-	 * @return boolean to determine whether the game is finished, true if game is finished, false otherwise
+	 * Method to handle resignations, draws to end the game.
+	 * @param input Move from user input.
+	 * @param board Board class representation of current game state.
+	 * @return True if game is finished, false otherwise.
 	 */
 	public static boolean gameFinished(String input, Board board) {
 		//Resign
@@ -113,22 +108,20 @@ public class Chess {
 	}
 	
 	/**
-	 * Gets the user input to move a piece "FileRank FileRank otherInfo"
-	 * Does not perform any action on the board
-	 * @param scanner Input scanner to get user input
-	 * @param board the current game state
-	 * @return String that represents the next userInput
+	 * Gets the user input to move a piece "FileRank FileRank ...".
+	 * Does not perform any action on the board.
+	 * @param scanner Input scanner to get user input.
+	 * @param board Board class representation of current game state.
+	 * @return String that represents the next userInput.
 	 */
 	public static String getInput(Scanner scanner, Board board) {
-		System.out.println();
 		if(board.isWhiteTurn) {
-			System.out.print("White's Move: ");
+			System.out.print("White's move: ");
 		}
 		else {
-			System.out.print("Black's Move: ");
+			System.out.print("Black's move: ");
 		}
 		String input = scanner.nextLine();
-		System.out.println();
 		return input;
 	}
 

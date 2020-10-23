@@ -3,43 +3,44 @@ package pieces;
 import chess.Board;
 /**
  * 
- * 
- * @author Jonathan Wong, Shreyas Heragu
  * Abstract class to fulfill role of different chess pieces.
+ * @author Jonathan Wong
+ * @author Shreyas Heragu
+ * 
  *
  */
 public abstract class ChessPiece {
 	
 	/**
-	 * Keeps track of piece's row
+	 * Keeps track of piece's row.
 	 */
 	private int row;
 	
 	/**
-	 * Keeps track of piece's column
+	 * Keeps track of piece's column.
 	 */
 	private int col;
 	
 	/**
-	 * Keeps track of piece's team color
+	 * Keeps track of piece's team color.
 	 */
 	private boolean isWhite;
 	
 	/**
-	 * Keeps track of piece's type (King, Queen, Bishop, Knight, Rook, Pawn)
+	 * Keeps track of piece's type (King, Queen, Bishop, Knight, Rook, Pawn).
 	 */
 	private char type;
 	
 	/**
-	 * Keeps track of whether the piece has moved
+	 * Keeps track of whether the piece has moved.
 	 */
 	private boolean hasMoved;
 	
 	/**
-	 * Constructor to initialize row, column and team
-	 * @param row		the row of the piece
-	 * @param col		the column of the piece
-	 * @param isWhite	the piece's team
+	 * Constructor to initialize row, column and team.
+	 * @param row The row of the piece.
+	 * @param col The column of the piece.
+	 * @param isWhite The piece's team: true if white, false if black.
 	 */
 	public ChessPiece(int row, int col, boolean isWhite) {
 		//type is determined only in subclasses
@@ -50,88 +51,88 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Gets row
-	 * @return this.row		the piece's row
+	 * Gets row.
+	 * @return The piece's row.
 	 */
 	public int row() {
 		return this.row;
 	}
 	
 	/**
-	 * Gets column
-	 * @return this.col		the piece's column
+	 * Gets column.
+	 * @return The piece's column.
 	 */
 	public int col() {
 		return this.col;
 	}
 	
 	/**
-	 * Gets team
-	 * @return this.isWhite		the piece's team
+	 * Gets team.
+	 * @return The piece's team.
 	 */
 	public boolean isWhite() {
 		return this.isWhite;
 	}
 	
 	/**
-	 * Gets type
-	 * @return this.type	the piece's type
+	 * Gets type.
+	 * @return The piece's type.
 	 */
 	public char type() {
 		return this.type;
 	}
 	
 	/**
-	 * Gets hasMoved
-	 * @return this.hasMoved	whether the piece has moved or not
+	 * Gets hasMoved.
+	 * @return True if the piece has moved, false otherwise.
 	 */
 	public boolean hasMoved() {
 		return this.hasMoved;
 	}
 	
 	/**
-	 * Sets row
-	 * @param row	the new row
+	 * Sets row.
+	 * @param row The new row.
 	 */
 	public void setRow(int row) {
 		this.row = row;
 	}
 	
 	/**
-	 * Sets column
-	 * @param col	the new column
+	 * Sets column.
+	 * @param col The new column.
 	 */
 	public void setCol(int col) {
 		this.col = col;
 	}
 	
 	/**
-	 * Sets hasMoved to bool
-	 * @param bool	the desired value of this.hasMoed
+	 * Sets hasMoved.
+	 * @param bool The desired value of hasMoved.
 	 */
 	protected void setHasMoved(boolean bool) {
 		this.hasMoved = bool;
 	}
 	
 	/**
-	 * Sets hasMoved to true
+	 * Sets hasMoved to true.
 	 */
 	public void move() {
 		this.hasMoved = true;
 	}
 	
 	/**
-	 * Sets type
-	 * @param type	the desired type of the piece
+	 * Sets type.
+	 * @param type The type of ChessPiece.
 	 */
 	protected void setType(char type) {
 		this.type = type;
 	}
 	
 	/**
-	 * Checks if there is an error with coordinate itself with respect to the board
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
+	 * Checks if there is an error with coordinate itself with respect to the board.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
 	 */
 	protected boolean errorCheck(int newRow, int newCol) {
 		//new coordinate not within bounds of board
@@ -146,11 +147,11 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Checks if input coordinate is a valid diagonal move (doesn't account for check)
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the relevant chess board
-	 * @return 			true if valid, false if not	
+	 * Checks if input coordinate is a valid diagonal move (doesn't account for check).
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	The relevant chess board.
+	 * @return True if valid, false if not.
 	 */
 	protected boolean diagCheck(int newRow, int newCol, Board board) {
 		//a diagonal move must have a slope with the absolute value of 1
@@ -190,11 +191,11 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Checks if input coordinate is a valid vertical move
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if valid, false if not	
+	 * Checks if input coordinate is a valid vertical move (doesn't account for check).
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board The chess board.
+	 * @return True if valid, false if not.
 	 */
 	protected boolean vertCheck(int newRow, int newCol, Board board) {
 		//checking if columns are the same
@@ -225,11 +226,11 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Checks if input coordinate is a valid horizontal move
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if valid, false if not	
+	 * Checks if input coordinate is a valid horizontal move (doesn't account for check).
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	 The chess board.
+	 * @return True if valid, false if not.	
 	 */
 	protected boolean horizCheck(int newRow, int newCol, Board board) {
 		//checking that rows are the same
@@ -261,11 +262,11 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Checks if a move results in the king being checked
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if king is checked, false if not	
+	 * Checks if a move results in the king being checked.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	The chess board.
+	 * @return True if king is checked, false if not.	
 	 */
 	protected boolean testDupMove(int newRow, int newCol, Board board) {
 		//copy of the input board
@@ -285,9 +286,9 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Checks if a legal move exists, by parsing through the entire board
-	 * @param board		the chess board
-	 * @return 			true if a legal move exists, false otherwise
+	 * Checks if a legal move exists, by parsing through the entire board.
+	 * @param board	The chess board.
+	 * @return True if a legal move exists, false otherwise.
 	 */
 	public boolean existsLegalMove(Board board) {
 		//invoking checkMove for all spaces on the chessBoard to see if there exists a legal move
@@ -303,10 +304,10 @@ public abstract class ChessPiece {
 	
 	/**
 	 * Checks if input coordinate is a valid chess move. Accounts for checks by calling testDupMove.
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if valid, false if not	
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	 The chess board.
+	 * @return True if valid, false if not.	
 	 */
 	public boolean checkMove(int newRow, int newCol, Board board) {
 		//calling the can attack method to see if the piece can move to the desired spot
@@ -319,33 +320,35 @@ public abstract class ChessPiece {
 	}
 	
 	/**
-	 * Checks if a move to the new coordinate is valid. Doesn't account for checks.
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if valid, false if not	
+	 * Abstract method to check if a move to the new coordinate is valid. Doesn't account for checks.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	The chess board.
+	 * @return True if valid, false if not.	
 	 */
 	public abstract boolean canAttack(int newRow, int newCol, Board board);
 	
 	/**
-	 * Returns a copy of the chess piece.
-	 * @return	a copy of the invoking chessPiece
+	 * Abstract method for a ChessPiece to return a copy of itself.
+	 * @return A copied instance of the invoking ChessPiece.
 	 */
 	public abstract ChessPiece copy();
 	
 	/**
-	 * Determines whether input move is a valid castle. Only works for Kings.
-	 * @param newRow	row of destination coordinate
-	 * @param newCol	column of destination coordinate
-	 * @param board		relevant chess board
-	 * @return	true if valid, false if not
+	 * Determines whether input move is a valid castle. Only overridden for Kings.
+	 * @param newRow Row of destination coordinate.
+	 * @param newCol Column of destination coordinate.
+	 * @param board	Relevant chess board.
+	 * @return True if valid, false if not.
 	 */
-	public abstract boolean isValidCastle(int newRow, int newCol, Board board);
+	public boolean isValidCastle(int newRow, int newCol, Board board) {
+		return false;
+	}
 	
 	
 	/**
-	 * Returns the string representation of the piece
-	 * @return	a string which has the team and piece type
+	 * Returns the String representation of the piece
+	 * @return A String representing team and piece type.
 	 */
 	public String toString() {
 		if(this.isWhite) {

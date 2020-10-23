@@ -1,14 +1,20 @@
 package pieces;
 
 import chess.Board;
-
+/**
+ * 
+ * Class that represents a King.
+ * @author Jonathan Wong
+ * @author Shreyas Heragu
+ *
+ */
 public class King extends ChessPiece {
 	
 	/**
 	 * Constructor to initialize row, column and team. Initializes type to 'K'.
-	 * @param row		the row of the piece
-	 * @param col		the column of the piece
-	 * @param isWhite	the piece's team
+	 * @param row The row of the piece.
+	 * @param col The column of the piece.
+	 * @param isWhite The piece's team: true if white, false if black.
 	 */
 	public King(int row, int col, boolean isWhite) {
 		super(row,col,isWhite);
@@ -16,8 +22,8 @@ public class King extends ChessPiece {
 	}
 	
 	/**
-	 * Returns a copy of the King
-	 * @return	a copy of the invoking King
+	 * King implementation of abstract method for a ChessPiece to return a copy of itself.
+	 * @return A copied instance of the invoking King.
 	 */
 	public ChessPiece copy() {
 		King k = new King(this.row(),this.col(),this.isWhite());
@@ -26,11 +32,11 @@ public class King extends ChessPiece {
 	}
 	
 	/**
-	 * Determines whether input move is a valid castle.
-	 * @param newRow	row of destination coordinate
-	 * @param newCol	column of destination coordinate
-	 * @param board		relevant chess board
-	 * @return	true if valid, false if not
+	 * Overrides generic ChessPiece method determining if move is a valid castle move.
+	 * @param newRow Row of destination coordinate.
+	 * @param newCol Column of destination coordinate.
+	 * @param board	Relevant chess board.
+	 * @return True if valid, false if not.
 	 */
 	public boolean isValidCastle(int newRow, int newCol, Board board){
 		//castle can't be done if king has moved
@@ -87,11 +93,11 @@ public class King extends ChessPiece {
 	}
 	
 	/**
-	 * Checks if a Castle move results in the king being checked
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if king is checked, false if not	
+	 * Checks if a Castle move results in the king being checked.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	The chess board.
+	 * @return True if king is checked, false if not.	
 	 */
 	protected boolean testDupCastle(int newCol, Board board) {
 		//board copy
@@ -127,11 +133,11 @@ public class King extends ChessPiece {
 	
 	/**
 	 * Checks if input coordinate is a valid chess move. Accounts for checks by calling testDupMove.
-	 * Overrides ChessPiece method since King potentially has a special castle move
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if valid, false if not	
+	 * Overrides generic ChessPiece method since Kings have to check for castles.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	 The chess board.
+	 * @return True if valid, false if not.	
 	 */
 	public boolean checkMove(int newRow, int newCol, Board board) {
 		//we can attack the destination spot
@@ -148,11 +154,11 @@ public class King extends ChessPiece {
 	}
 	
 	/**
-	 * Checks if a move to the new coordinate is valid. Doesn't account for checks.
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if valid, false if not	
+	 * King implementation of abstract method to check if a move to the new coordinate is valid. Doesn't account for checks.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	The chess board.
+	 * @return True if valid, false if not.	
 	 */
 	public boolean canAttack(int newRow, int newCol, Board board) {
 		//checking for basic errors

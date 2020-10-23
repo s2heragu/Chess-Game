@@ -4,15 +4,16 @@ import chess.Board;
 /**
  * 
  * Class that represents a Knight.
- * @author Jonathan Wong, Shreyas Heragu
+ * @author Jonathan Wong
+ * @author Shreyas Heragu
  *
  */
 public class Knight extends ChessPiece {
 	/**
 	 * Constructor to initialize row, column and team. Initializes type to 'N'.
-	 * @param row		the row of the piece
-	 * @param col		the column of the piece
-	 * @param isWhite	the piece's team
+	 * @param row The row of the piece.
+	 * @param col The column of the piece.
+	 * @param isWhite The piece's team: true if white, false if black.
 	 */
 	public Knight(int row, int col, boolean isWhite) {
 		super(row,col,isWhite);
@@ -20,8 +21,8 @@ public class Knight extends ChessPiece {
 	}
 	
 	/**
-	 * Returns a copy of the Knight
-	 * @return	a copy of the invoking Knight
+	 * Knight implementation of abstract method for a ChessPiece to return a copy of itself.
+	 * @return A copied instance of the invoking Knight.
 	 */
 	public ChessPiece copy() {
 		Knight k = new Knight(this.row(),this.col(),this.isWhite());
@@ -30,11 +31,11 @@ public class Knight extends ChessPiece {
 	}
 
 	/**
-	 * Checks if a move to the new coordinate is valid. Doesn't account for checks.
-	 * @param newRow	the row of the new coordinate
-	 * @param newCol	the column of the new coordinate
-	 * @param board		the chess board
-	 * @return 			true if valid, false if not	
+	 * Knight implementation of abstract method to check if a move to the new coordinate is valid. Doesn't account for checks.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	The chess board.
+	 * @return True if valid, false if not.	
 	 */
 	public boolean canAttack(int newRow, int newCol, Board board) {
 		//checking for errors
@@ -52,17 +53,6 @@ public class Knight extends ChessPiece {
 				return true;
 			}
 		}
-		return false;
-	}
-	
-	/**
-	 * Determines whether input move is a valid castle.
-	 * @param newRow	row of destination coordinate
-	 * @param newCol	column of destination coordinate
-	 * @param board		relevant chess board
-	 * @return			false since piece is not a king
-	 */
-	public boolean isValidCastle(int newRow, int newCol, Board board) {
 		return false;
 	}
 

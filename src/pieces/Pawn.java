@@ -4,28 +4,30 @@ import chess.Board;
 /**
  * 
  * Class that represents a Pawn.
- * @author Jonathan Wong, Shreyas Heragu
+ * @author Jonathan Wong
+ * @author Shreyas Heragu
  *
  */
 public class Pawn extends ChessPiece{
 	/**
-	 * Variable to determine if this piece can be attacked through an en passant
+	 * Variable to determine if this piece can be attacked through an en passant.
 	 */
 	public boolean canEnPassant;
 	
 	/**
-	 * Pawn constructor
-	 * @param row Sets the field of the pawn's row
-	 * @param col Sets the field of the pawn's column
-	 * @param isWhite true if the pawn is on the white team, false for the black team
+	 * Constructor to initialize row, column and team. Initializes type to 'p'.
+	 * @param row The row of the piece.
+	 * @param col The column of the piece.
+	 * @param isWhite The piece's team: true if white, false if black.
 	 */
 	public Pawn(int row, int col, boolean isWhite) {
 		super(row,col,isWhite);
 		setType('p');
 	}
+	
 	/**
-	 * Method to get a deep copy of a Pawn object
-	 * @return Returns a new pawn copied instance
+	 * Pawn implementation of abstract method for a ChessPiece to return a copy of itself.
+	 * @return A copied instance of the invoking Pawn.
 	 */
 	public ChessPiece copy() {
 		Pawn p = new Pawn(this.row(),this.col(),this.isWhite());
@@ -34,12 +36,11 @@ public class Pawn extends ChessPiece{
 	}
 	
 	/**
-	 * Method to determine if a piece can move to a spot without checking for king checked.
-	 * @param newRow destination row of the piece
-	 * @param newCol destination column of the piece
-	 * @param board Chess board class instance with current game state
-	 * @return boolean to determine whether a piece can move here without checking for king being checked, 
-	 * true if can attack, false otherwise
+	 * Pawn implementation of abstract method to check if a move to the new coordinate is valid. Doesn't account for checks.
+	 * @param newRow The row of the new coordinate.
+	 * @param newCol The column of the new coordinate.
+	 * @param board	The chess board.
+	 * @return True if valid, false if not.	
 	 */
 	public boolean canAttack(int newRow, int newCol, Board board) {
 		//Bad new row or column
@@ -176,17 +177,6 @@ public class Pawn extends ChessPiece{
 
 		
 		
-		return false;
-	}
-	
-	/**
-	 * Determines whether input move is a valid castle.
-	 * @param newRow	row of destination coordinate
-	 * @param newCol	column of destination coordinate
-	 * @param board		relevant chess board
-	 * @return			false since piece is not a king
-	 */
-	public boolean isValidCastle(int newRow, int newCol, Board board) {
 		return false;
 	}
 
