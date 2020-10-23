@@ -169,6 +169,10 @@ public class Board{
 		int fromCol = charToCol(from.charAt(0));
 		int toRow = Character.getNumericValue(to.charAt(1));
 		int toCol = charToCol(to.charAt(0));
+		//outside of board range
+		if(toRow < 1 || fromRow < 1 || toRow > 8 || fromRow > 8 || toCol < 1 || fromCol < 1 || toCol > 8 ||fromCol > 8) {
+			return false;
+		}
 		ChessPiece piece = board[fromRow][fromCol];
 		if(piece == null) {
 			return false;
