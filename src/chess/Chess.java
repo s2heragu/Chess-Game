@@ -19,6 +19,7 @@ public class Chess {
 		Scanner scanner = new Scanner(System.in);
 		
 		Board board = new Board();
+		boolean firstTurn = true;
 		
 		boolean dontDisplay = false;
 		while(true) {
@@ -44,9 +45,12 @@ public class Chess {
 			//Print board
 			//Do not print board if previous input was illegal
 			if(!dontDisplay) {
-				System.out.println();
+				if(!firstTurn) {
+					System.out.println();
+				}
 				System.out.println(board);
 				System.out.println();
+				firstTurn = false;
 			}
 			
 			//Check
