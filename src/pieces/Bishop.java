@@ -21,8 +21,8 @@ public class Bishop extends ChessPiece {
 	}
 	
 	/**
-	 * Returns a copy of the Bishop.
-	 * @return A copy of the invoking Bishop.
+	 * Bishop implementation of abstract method for a ChessPiece to return a copy of itself.
+	 * @return A copied instance of the invoking Bishop.
 	 */
 	public ChessPiece copy() {
 		Bishop b = new Bishop(this.row(),this.col(),this.isWhite());
@@ -31,7 +31,7 @@ public class Bishop extends ChessPiece {
 	}
 
 	/**
-	 * Checks if a move to the new coordinate is valid. Doesn't account for checks.
+	 * Bishop implementation of abstract method to check if a move to the new coordinate is valid. Doesn't account for checks.
 	 * @param newRow The row of the new coordinate.
 	 * @param newCol The column of the new coordinate.
 	 * @param board	The chess board.

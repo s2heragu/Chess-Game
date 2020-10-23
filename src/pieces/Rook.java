@@ -31,7 +31,7 @@ public class Rook extends ChessPiece{
 	}
 
 	/**
-	 * Queen implementation of abstract method to check if a move to the new coordinate is valid. Doesn't account for checks.
+	 * Rook implementation of abstract method to check if a move to the new coordinate is valid. Doesn't account for checks.
 	 * @param newRow The row of the new coordinate.
 	 * @param newCol The column of the new coordinate.
 	 * @param board	The chess board.
