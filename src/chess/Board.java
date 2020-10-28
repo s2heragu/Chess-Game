@@ -181,7 +181,13 @@ public class Board{
 		if(this.isWhiteTurn != piece.isWhite()) {
 			return false;
 		}
-
+		
+		//Castling
+		if(piece.isValidCastle(toRow, toCol, this)) {
+			if(this.kingChecked(piece.isWhite())) {
+				return false;
+			}
+		}
 		//Legality
 		if(piece.checkMove(toRow, toCol, this)) {
 			if(info.length == 3) {
